@@ -206,11 +206,15 @@ int ans9(int x){
 
 /* Question 10 */
 int ques10(int x){
-    int m8= 0xAA;
-    int m16 = m8 | m8 <<8;
-    int m32 = m16 | m16<<16;
-    int fillx = x | m32;
-    return !(~fillx);
+    int m8= 0xAA;//starts with aa
+    int m16 = m8 | m8 <<8;// then becomes aaaa
+    int m32 = m16 | m16<<16;//then becomes aaaaaaa
+    int fillx = x | m32;//this cycles through ending in b, a, b, e, f
+    return !(~fillx);//not 1 is 0 therefore it becomes 0
+}
+int ans10(int x){
+   
+    return 0;
 }
 
 
@@ -321,7 +325,7 @@ int main(){
   //}   
   
   for(int i = 1; i < 21; i++){
-  printf("%d, %d, output of ques9 is t1 = %04x, t2 =%04x  \n", i, 1, ques9(i), ans9(i));
+  printf("%d, %d, output of ques10 is t1 = %04x, t2 =%04x  \n", i, 1, ques10(i), ans10(i));
   }
 	return 0;
 }
