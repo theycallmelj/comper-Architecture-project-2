@@ -220,10 +220,14 @@ int ans10(int x){
 
 /*Question 11 */
 int ques11(int x, int y){
-    int x_and_y = x &y;
-    int nx_and_ny = (~x & ~y);
-    return (x_and_y | nx_and_ny );
-    }
+    int x_and_y = x &y;// x is a 1 and  so is y
+    int nx_and_ny = (~x & ~y);// x is a 0 and  so is y
+    return (x_and_y | nx_and_ny );// x = y thereby is a bitwise inverted xor
+  }
+int ans11(int x, int y){
+    
+    return ~(x^y);
+  }
 
 /* Question 12 */
 
@@ -312,20 +316,21 @@ int main(){
  the return value) for each of the questions and answers */
 
 
-   //for(int i = 1; i < 21; i++){
-       // for(int j = 1; j < 21; j++){
-       // t1=ques7(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
+   for(int i = 1; i < 21; i++){
+        for(int j = 1; j < 21; j++){
+        t1=ques11(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
  
-     // int t2 =ans7(i, j);
-      // if(t1 != t2){
-     //       printf("%d, %d, output of ques7 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
-    //   }
+     int t2 =ans11(i, j);
+      if(t1 != t2){
+            printf("%d, %d, output of ques7 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
+      }
         
-    //   }
-  //}   
-  
+      }
+  }   
+  /**
   for(int i = 1; i < 21; i++){
   printf("%d, %d, output of ques10 is t1 = %04x, t2 =%04x  \n", i, 1, ques10(i), ans10(i));
   }
+  **/
 	return 0;
 }
