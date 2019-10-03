@@ -94,7 +94,7 @@ int ans1(int x, int y){
 
 /* Question 2 */
 int ques2(x) {
-    int mask = x>>31;//shifts it to the left 31 bits resulting in 0
+    int mask = x>>31;//shifts it to the right 31 bits resulting in 0
     int y= (x ^ mask);// xors it resulting in the input number
     int z = (~mask + 1);//results in 0
     return (y+z);//returns starting number
@@ -156,11 +156,16 @@ int ans5(int x, int n)
 
 int ques6(int x, int n){
   /* assume n<=30 */
-  int mask = (1 <<n) + ( ~0);
-  int bias = (x >> 31) & mask;
+  int mask = (1 <<n) + ( ~0);// shifts left
+  int bias = (x >> 31) & mask;//shifts right
+  //bias is always 0
   return ((x+bias)>> n);
 }
 
+int ans6(int x, int n)
+{
+    return (x+0)>>n;
+}
 
 /* Question 7 */
 
@@ -291,11 +296,11 @@ int main(){
 
    for(int i = 1; i < 21; i++){
         for(int j = 1; j < 21; j++){
-        t1=ques5(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
-	    int t2 =ans5(i, j);
-       //if(t1 != t2){
-            printf("%d, %d, output of ques5 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
-       //}
+        t1=ques6(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
+	    int t2 =ans6(i, j);
+       if(t1 != t2){
+            printf("%d, %d, output of ques6 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
+       }
         
        }
 }   
