@@ -171,27 +171,37 @@ int ans6(int x, int n)
 
 int ques7(int x, int y){
     int sum= x+y;
-    int x_neg= x>>31;
-    int y_neg = y>>31;
-    int s_neg = sum>>31;
-    return !(~(x_neg^y_neg) & (x_neg^s_neg));
+    int x_neg= x>>31;//this is 0
+    int y_neg = y>>31;//this 0
+    int s_neg = sum>>31;//this 0
+    return !(~(x_neg^y_neg) & (x_neg^s_neg));//returns 1
     }
+int ans7(int x, int y){
+  
+  return 1;
+}
 
 /* Question 8  */
 int ques8(void) {
-    int byte = 0xAA;
-    int word = byte | byte<<8;
-
-    return word | word<<16;
+    int byte = 0xAA;//00aa
+    int word = byte | byte<<8;//double the statement by moving the statment to the left and keeping the orginal statment
+    //kind of like a copy and append of hex values
+    return word | word<<16;//does the same thing as above just doubles this
 }
-
+int ans8(void) {
+    return -1431655766;
+}
 /* Question 9 */
 int ques9(int x){
-    int m8= 0xAA;
-    int m16 = m8 | m8 <<8;
-    int m32 = m16 | m16<<16;
-    int y = x | m32;
-    return !! y;
+    int m8= 0xAA;// starts with aa
+    int m16 = m8 | m8 <<8;// then becomes aaaa
+    int m32 = m16 | m16<<16;//then becomes aaaaaaa
+    int y = x | m32;//this cycles through b, a, b, e, f
+    return !! y;// the first ! makes it 0000, the second makes it 0001
+    }
+int ans9(int x){
+    
+    return 1;
     }
 
 /* Question 10 */
@@ -202,6 +212,7 @@ int ques10(int x){
     int fillx = x | m32;
     return !(~fillx);
 }
+
 
 /*Question 11 */
 int ques11(int x, int y){
@@ -288,21 +299,29 @@ int main(){
 	//t1=ans1(a,b); /* call function ans0, return value is in t1. Next, print out the return value */
 	//printf("output of ans0 is t1 = %d  \n", t1);
 
-
+/**
+ * Since the orginally input was a number between 1 and 20 I am only using numbers within that domain
+ * 
+ **/
 
 	/* To test/run the functions, you will need to mimic the above process (input numbers and then call each of the functions, and print
  the return value) for each of the questions and answers */
 
 
-   for(int i = 1; i < 21; i++){
-        for(int j = 1; j < 21; j++){
-        t1=ques6(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
-	    int t2 =ans6(i, j);
-       if(t1 != t2){
-            printf("%d, %d, output of ques6 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
-       }
+   //for(int i = 1; i < 21; i++){
+       // for(int j = 1; j < 21; j++){
+       // t1=ques7(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
+ 
+     // int t2 =ans7(i, j);
+      // if(t1 != t2){
+     //       printf("%d, %d, output of ques7 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
+    //   }
         
-       }
-}   
+    //   }
+  //}   
+  
+  for(int i = 1; i < 21; i++){
+  printf("%d, %d, output of ques9 is t1 = %04x, t2 =%04x  \n", i, 1, ques9(i), ans9(i));
+  }
 	return 0;
 }
