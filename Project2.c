@@ -138,11 +138,18 @@ int ans4(int x, int y){
 int ques5(int x, int n) {
     /* for this question ONLY, you can  assume x and n are not  negative numbers  */
 
-    int temp = (1 << n);// moves 1 over n bits
-    
+    int temp = (1 << n);// moves 1 over n bits to the left    
     int z = temp + ~0;//temp is added by negative 1
-    printf("z and x : %d\n", z&x);
+    //printf("z and x : %d\n", z&x);
     return (z & x);
+
+    //if n <= the number of bits it gets a different answer otherwise it is x
+}
+
+int ans5(int x, int n)
+{
+    int k = (int)pow(2,n);
+    return (k-1)&x;
 }
 
 /* Question 6 */
@@ -282,11 +289,15 @@ int main(){
  the return value) for each of the questions and answers */
 
 
-   //for(int i = 1; i < 21; i++){
-        //for(int j = 1; j < 21; j++){
-        t1=ques5(6,1); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
-	    printf("%d, output of ques5 is t1 = %d  \n", 1, t1);
-       // }
-//}   
+   for(int i = 1; i < 21; i++){
+        for(int j = 1; j < 21; j++){
+        t1=ques5(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
+	    int t2 =ans5(i, j);
+       //if(t1 != t2){
+            printf("%d, %d, output of ques5 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
+       //}
+        
+       }
+}   
 	return 0;
 }
