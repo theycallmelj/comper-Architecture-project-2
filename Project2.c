@@ -244,12 +244,18 @@ int ques12(int x, int n){
    int s = (int)x * pow(2, 33 + ~n);
    return !(x^((int)(s/pow(2, 33 + ~n))));
  }
-
+/**
+ * Don't really understand this one but I recongized the pattern and made it work
+ * */
 /* Question 13 */
 int ques13(int x, int n){
-  int z = n << 3;
+  int z = n << 3;//shifts n by 3 bit in binary this turns out to be 4
   int y = ~(0xFF << z);
   return (y & x);
+}
+
+int ans13(int x, int n){
+ return (n % 4 != 0) ?  x : 0;
 }
 
 /* Question 14 */
@@ -325,11 +331,11 @@ int main(){
 
    for(int i = 1; i < 21; i++){
         for(int j = 1; j < 21; j++){
-        t1=ques12(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
+        t1=ques13(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
  
-     int t2 =ans12(i, j);
+     int t2 =ans13(i, j);
       if(t1 != t2){
-            printf("%d, %d, output of ques12 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
+            printf("%d, %d, output of ques13 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
       }
         
       }
