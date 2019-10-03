@@ -233,10 +233,17 @@ int ans11(int x, int y){
 
 int ques12(int x, int n){
   /* assume n is <= 32 */
-	int shift = 32 + ~n +1 ;
-	int move = (x << shift) >> shift;
+	int shift = 32 + ~n +1;
+	int move = (x << shift) >> shift;//this justs removes the bits
 	return !(x^move);
 	}
+  /**
+   * This one is intersting since most of the diffenece has to due with the loss of bits due to the shifting process
+   **/
+ int ans12(int x, int n){
+   int s = (int)x * pow(2, 33 + ~n);
+   return !(x^((int)(s/pow(2, 33 + ~n))));
+ }
 
 /* Question 13 */
 int ques13(int x, int n){
@@ -318,11 +325,11 @@ int main(){
 
    for(int i = 1; i < 21; i++){
         for(int j = 1; j < 21; j++){
-        t1=ques11(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
+        t1=ques12(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
  
-     int t2 =ans11(i, j);
+     int t2 =ans12(i, j);
       if(t1 != t2){
-            printf("%d, %d, output of ques7 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
+            printf("%d, %d, output of ques12 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
       }
         
       }
