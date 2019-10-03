@@ -262,10 +262,10 @@ int ans13(int x, int n){
 
 int ques14(int x, int n, int m){
 /* assume 0 <= n <=3 and 0 <= m <=3 */
-	int n8= n <<3;
-	int m8 = m <<3;
-	int n_mask = 0xff << n8;
-	int m_mask = 0xff << m8;
+	int n8= n <<3;//n * 8
+	int m8 = m <<3;//m*8
+	int n_mask = 0xff << n8;//255 * 2^n8
+	int m_mask = 0xff << m8;//255 * 2^m8
 	int n_byte = ((x & n_mask) >>n8) & 0xff;
 	int m_byte = ((x & m_mask) >> m8) & 0xff;
 	int bytes_mask = n_mask | m_mask ;
@@ -274,23 +274,36 @@ int ques14(int x, int n, int m){
 	}
 
 
+
+
 /* Question 15 */
 
 int ques15(int x){
-  int nx = ~x;
-  int nxnz = !!nx;
-  int nxov = !( nx +nx);
+  int nx = ~x;// twos complenment
+  int nxnz = !!nx;// 1 if not zero
+  int nxov = !( nx +nx);// the not of a negative results in 0
   return (nxnz & nxov);
 }
 
+int ans15(int x){
+  return 0;
+}
+
+
 /* Question 16 */
 int ques16(int x){
-    int wd16 = x ^ (x>>16);
-    int wd8 = wd16 ^ (wd16 >>8);
-    int wd4 = wd8 ^ (wd8<<4);
-    int wd2= wd4 ^ (wd4<<2);
-    int bit = (wd2 ^ (wd2>>1)) & (0x1);
+    int wd16 = x ^ (x>>16);//x
+    int wd8 = wd16 ^ (wd16 >>8);//x
+    int wd4 = wd8 ^ (wd8<<4);// does a xor between wd8 and wd8*64
+    int wd2= wd4 ^ (wd4<<2);// does a xor between wd4 and wd4*4
+    int bit = (wd2 ^ (wd2>>1)) & (0x1);//xor between wd2 and wd2*2 the and is extra
+
+    //results in being a sequence of 1,1,0,0
     return bit;
+}
+int ans16(int x){
+    int mod = x%4;
+    return (mod ==1 ||mod == 2) ?  1 : 0;
 }
 
 
@@ -328,22 +341,24 @@ int main(){
 	/* To test/run the functions, you will need to mimic the above process (input numbers and then call each of the functions, and print
  the return value) for each of the questions and answers */
 
-
-   for(int i = 1; i < 21; i++){
-        for(int j = 1; j < 21; j++){
-        t1=ques13(i,j); /* call function ques0; return value is stored in t1 . Next, print out the return value. */
+/**
+   for(int i = 1; i < 20; i++){
+        for(int j = 0; j < 4; j++){
+          for(int k = 0; k < 4; k++){
+          t1=ques14(i,j, k); // call function ques0; return value is stored in t1 . Next, print out the return value. 
  
-     int t2 =ans13(i, j);
-      if(t1 != t2){
-            printf("%d, %d, output of ques13 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
-      }
-        
+          int t2 =ans14(i, j,k);
+           //if(t1 != t2){
+              printf("%d, %d, output of ques14 is t1 = %d, t2 =%d  \n", i, j, t1, t2);
+            //}
+        }
       }
   }   
-  /**
-  for(int i = 1; i < 21; i++){
-  printf("%d, %d, output of ques10 is t1 = %04x, t2 =%04x  \n", i, 1, ques10(i), ans10(i));
-  }
   **/
+  
+  for(int i = 1; i < 21; i++){
+    printf("%d, %d, output of ques16 is t1 = %04x, t2 =%d  \n", i, 1, ques16(i), ans16(i));
+  }
+  
 	return 0;
 }
