@@ -1,5 +1,7 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 /*
 Team number:19
 Team members: Liam, Evan, Oscar
@@ -58,10 +60,10 @@ set of questions then specify that information. We will take team member contrib
 /*  function ques0(x,y) returns (x-y) since ~y +1 is the two's complement of y, i.e., -y. */
 /* the function ans0 does the same in one C statement */
 
-int ques0(int x, int y){//subtracts y from x
+int ques0(int x, int y){ //subtracts y from x
     int temp;
     temp = ~y;
-    temp = temp +1;
+    temp = temp + 1;
     temp = temp + x;
     return (temp);
 }
@@ -82,10 +84,11 @@ int ans0(int x, int y){
 
 /* Question 1 */
 int ques1(int x, int y){
-    int x_and_y = x&y; //bit wise and
-    int x_or_y = ~(~x & ~y); //not (not x and not y) so x or y
-    return (x_or_y & ~(x_and_y));// thereby produces an xor
+    int x_and_y = x&y;                //bit wise and
+    int x_or_y = ~(~x & ~y);          //not (not x and not y) so x or y
+    return (x_or_y & ~(x_and_y));     //thereby produces an xor
     }
+
 int ans1(int x, int y){
     //xor
     return  x ^ y;
@@ -138,19 +141,19 @@ int ans4(int x, int y){
 int ques5(int x, int n) {
     /* for this question ONLY, you can  assume x and n are not  negative numbers  */
 
-    int temp = (1 << n);// moves 1 over n bits to the left    
-    int z = temp + ~0;//temp is added by negative 1
+    int temp = (1 << n);       // moves 1 over n bits to the left    
+    int z = temp + ~0;         // temp is added by negative 1
     //printf("z and x : %d\n", z&x);
     return (z & x);
 
     //if n <= the number of bits it gets a different answer otherwise it is x
 }
 
-int ans5(int x, int n)
+/*int ans5(int x, int n)
 {
     int k = (int)pow(2,n);
     return (k-1)&x;
-}
+}*/ //TODO: Fix answ 5 function
 
 /* Question 6 */
 
@@ -240,10 +243,10 @@ int ques12(int x, int n){
   /**
    * This one is intersting since most of the diffenece has to due with the loss of bits due to the shifting process
    **/
- int ans12(int x, int n){
+/* int ans12(int x, int n){
    int s = (int)x * pow(2, 33 + ~n);
    return !(x^((int)(s/pow(2, 33 + ~n))));
- }
+ }*/ // TODO: Fix A12
 /**
  * Don't really understand this one but I recongized the pattern and made it work
  * */
@@ -355,8 +358,38 @@ int main(){
       }
   }   
   **/
-  
-  for(int i = 1; i < 21; i++){
+  int i;
+  int j;
+  int t2;
+  // Question 1:
+  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < 5; j++)
+    {
+      t1 = ques1(i, j);
+      t2 = ques1(i, j);
+      if (t1 != t2)
+      {
+        printf("Error at %d, %d, output of ques1 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+
+  // Question 2:
+  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < 5; j++)
+    {
+      t1 = ques1(i, j);
+      t2 = ques1(i, j);
+      if (t1 != t2)
+      {
+        printf("Error at %d, %d, output of ques1 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+
+  for(i = 1; i < 21; i++){
     printf("%d, %d, output of ques16 is t1 = %04x, t2 =%d  \n", i, 1, ques16(i), ans16(i));
   }
   
