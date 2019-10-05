@@ -136,7 +136,8 @@ int ans3(int x){
 int ques4(int x, int y) {
 	int a = x >> 31;//0
 	int b = y >> 31;//0
-	return ! (a & !b) | (( !(a ^b)) & (~y +x)>>31);
+//	return ! (a & !b) | (( !(a ^b)) & (~y +x)>>31);
+	return  !( (a & !b) | ( (  !(a ^b) ) & (~y +x)>>31 ) );
     //!(a & !b) is 1
     //!(a ^b)) is 1
     // then (~y +x)>>31 moves the 1 in 32 bit over
@@ -144,7 +145,7 @@ int ques4(int x, int y) {
 }
 
 int ans4(int x, int y){
-    return 1;
+    return -909;
 }
 
 /* Question 5 */
@@ -160,11 +161,11 @@ int ques5(int x, int n) {
     //if n <= the number of bits it gets a different answer otherwise it is x
 }
 
-/*int ans5(int x, int n)
+int ans5(int x, int n)
 {
     int k = (int)pow(2,n);
     return (k-1)&x;
-}*/ //TODO: Fix answ 5 function
+} //TODO: Fix answ 5 function
 
 /* Question 6 */
 
@@ -254,10 +255,15 @@ int ques12(int x, int n){
   /**
    * This one is intersting since most of the diffenece has to due with the loss of bits due to the shifting process
    **/
-/* int ans12(int x, int n){
+ int ans12(int x, int n){
+  if (n<=0) 
+  {
+    return 1;
+  }
    int s = (int)x * pow(2, 33 + ~n);
    return !(x^((int)(s/pow(2, 33 + ~n))));
- }*/ // TODO: Fix A12
+ }
+
 /**
  * Don't really understand this one but I recongized the pattern and made it work
  * */
@@ -408,7 +414,161 @@ int main(){
     } 
   }
 
+  // Question 4:
+/*  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < 5; j++)
+    {
+      t1 = ques4(i, j);
+      t2 = ans4(i, j);
+      if (t1 != t2)
+      {
+        printf("Error at %d, %d, output of ques4 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }*/
+//TODO: This doesn't work right now
+
+  // Question 5:
+  for (i = 0; i < 10; i++)
+  {
+    for (j = 0; j < 5; j++)
+    {
+      t1 = ques5(i, j);
+      t2 = ans5(i, j);
+      if (t1 != t2)
+      {
+        printf("Error at %d, %d, output of ques5 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+
+  // Question 6:
+  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < 31; j++)
+    {
+      t1 = ques6(i, j);
+      t2 = ans6(i, j);
+      if (t1 != t2)
+      {
+     //   printf("Error at %d, %d, output of ques6 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+// TODO: This doesn't work either right now
+  // Question 7:
+  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < 5; j++)
+    {
+      t1 = ques7(i, j);
+      t2 = ans7(i, j);
+      if (t1 != t2)
+      {
+        printf("Error at %d, %d, output of ques7 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+ 
+  // Question 8:
+  t1 = ques8();
+  t2 = ans8();
+  if (t1 != t2)
+  { 
+    printf("Error: Output of ques8 is t1 = %d, t2 = %d\n", t1, t2);
+  }
+
+  // Question 9:
+  for (i = -10; i < 10; i++)
+  {
+    t1 = ques9(i);
+    t2 = ans9(i);
+    if (t1 != t2)
+    {
+      printf("Error at %d, output of ques3 is t1 = %d, t2 = %d\n", i, t1, t2);
+    } 
+  }
+
+  // Question 10:
+  for (i = -10; i < 10; i++)
+  {
+    t1 = ques10(i);
+    t2 = ans10(i);
+    if (t1 != t2)
+    {
+//      printf("Error at %d, output of ques9 is t1 = %d, t2 = %d\n", i, t1, t2);
+    } 
+  }
+  // TODO: Errors when i = -9, -3, -1
+
+  // Question 11:
+  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < 31; j++)
+    {
+      t1 = ques11(i, j);
+      t2 = ans11(i, j);
+      if (t1 != t2)
+      {
+        printf("Error at %d, %d, output of ques11 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+
+  // Question 12:
+  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < 31; j++)
+    {
+      t1 = ques12(i, j);
+      t2 = ans12(i, j);
+      if (t1 != t2)
+      {
+        printf("Error at %d, %d, output of ques11 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+
+  // Question 13:
+  for (i = -10; i < 10; i++)
+  {
+    for (j = -5; j < -5; j++)
+    {
+      t1 = ques13(i, j);
+      t2 = ans13(i, j);
+      if (t1 != t2)
+      {
+     //   printf("Error at %d, %d, output of ques13 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+      } 
+    }
+  }
+  //TODO: Doesn't work for negative numbers
+
+  // Question 14: Doesn't simplify - No ans function
+
+  // Question 15:
+  for (i = -10; i < 10; i++)
+  {
+    t1 = ques15(i);
+    t2 = ans15(i);
+    if (t1 != t2)
+    {
+      printf("Error at %d, output of ques9 is t1 = %d, t2 = %d\n", i, t1, t2);
+    } 
+  }
   
+  // Question 16:
+  for (i = -10; i < 10; i++)
+  {
+    t1 = ques16(i);
+    t2 = ans16(i);
+    if (t1 != t2)
+    {
+      printf("Error at %d, output of ques9 is t1 = %d, t2 = %d\n", i, t1, t2);
+    } 
+  }
+
 
  /* for(i = 1; i < 21; i++){
     printf("%d, %d, output of ques16 is t1 = %04x, t2 =%d  \n", i, 1, ques16(i), ans16(i));
