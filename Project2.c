@@ -5,6 +5,13 @@
 /*
 Team number:19
 Team members: Liam, Evan, Oscar
+
+How work was divided:
+Liam: Worked on parts A and B; provided base ans functions
+Evan: Typed HANDIN instructions; Worked on part A report
+Oscar: Provided unit tests, fixed functions to include negative inputs
+
+
 */
 
 /* PROJECT 1 */
@@ -96,10 +103,10 @@ int ans1(int x, int y){
 
 /* Question 2 */
 int ques2(x) {
-    int mask = x>>31;//shifts it to the right 31 bits resulting in 0
-    int y= (x ^ mask);// xors it resulting in the input number
-    int z = (~mask + 1);//results in 0
-    return (y+z);//returns starting number
+    int mask = x>>31;                 // shifts it to the right 31 bits resulting in 0
+    int y= (x ^ mask);                // xors it resulting in the input number
+    int z = (~mask + 1);              // results in 0
+    return (y+z);                     // returns starting number
 }
 
 int ans2(x){
@@ -114,9 +121,9 @@ int ans2(x){
 
 /* Question 3 */
 int ques3(int x) {
-    int y = x >> 31;//is zero
-    int z = !!x;//inverts the bits
-    return y | z;//or
+    int y = x >> 31;                 // is zero
+    int z = !!x;                     // inverts the bits
+    return y | z;                    // or
 }
 
 int ans3(int x){
@@ -134,18 +141,17 @@ int ans3(int x){
 /* Question 4 */
 
 int ques4(int x, int y) {
-	int a = x >> 31;//0
-	int b = y >> 31;//0
-//	return ! (a & !b) | (( !(a ^b)) & (~y +x)>>31);
-	return  !( (a & !b) | ( (  !(a ^b) ) & (~y +x)>>31 ) );
-    //!(a & !b) is 1
-    //!(a ^b)) is 1
+    int a = x >> 31;//0
+    int b = y >> 31;//0
+    return  !( (a & !b) | ( (  !(a ^b) ) & (~y +x)>>31 ) );
+    // !(a & !b) is 1
+    // !(a ^b)) is 1
     // then (~y +x)>>31 moves the 1 in 32 bit over
 	  
 }
 
 int ans4(int x, int y){
-    return -909;
+    return 1;
 }
 
 /* Question 5 */
@@ -155,25 +161,24 @@ int ques5(int x, int n) {
 
     int temp = (1 << n);       // moves 1 over n bits to the left    
     int z = temp + ~0;         // temp is added by negative 1
-    //printf("z and x : %d\n", z&x);
     return (z & x);
 
-    //if n <= the number of bits it gets a different answer otherwise it is x
+                               // if n <= the number of bits it gets a different answer otherwise it is x
 }
 
 int ans5(int x, int n)
 {
     int k = (int)pow(2,n);
     return (k-1)&x;
-} //TODO: Fix answ 5 function
+}
 
 /* Question 6 */
 
 int ques6(int x, int n){
   /* assume n<=30 */
-  int mask = (1 <<n) + ( ~0);// shifts left
-  int bias = (x >> 31) & mask;//shifts right
-  //bias is always 0
+  int mask = (1 <<n) + ( ~0);    // shifts left
+  int bias = (x >> 31) & mask;   // shifts right
+                                 // bias is always 0
   return ((x+bias)>> n);
 }
 
@@ -186,10 +191,10 @@ int ans6(int x, int n)
 
 int ques7(int x, int y){
     int sum= x+y;
-    int x_neg= x>>31;//this is 0
-    int y_neg = y>>31;//this 0
-    int s_neg = sum>>31;//this 0
-    return !(~(x_neg^y_neg) & (x_neg^s_neg));//returns 1
+    int x_neg= x>>31;                          // this is 0
+    int y_neg = y>>31;                         // this 0
+    int s_neg = sum>>31;                       // this 0
+    return !(~(x_neg^y_neg) & (x_neg^s_neg));  // returns 1
     }
 int ans7(int x, int y){
   
@@ -415,9 +420,9 @@ int main(){
   }
 
   // Question 4:
-/*  for (i = -10; i < 10; i++)
+  for (i = 0; i < 10; i++)
   {
-    for (j = -5; j < 5; j++)
+    for (j = 0; j < 5; j++)
     {
       t1 = ques4(i, j);
       t2 = ans4(i, j);
@@ -426,8 +431,7 @@ int main(){
         printf("Error at %d, %d, output of ques4 is t1 = %d, t2 = %d\n", i, j, t1, t2);
       } 
     }
-  }*/
-//TODO: This doesn't work right now
+  }
 
   // Question 5:
   for (i = 0; i < 10; i++)
@@ -444,19 +448,19 @@ int main(){
   }
 
   // Question 6:
-  for (i = -10; i < 10; i++)
+  for (i = 0; i < 10; i++)
   {
-    for (j = -5; j < 31; j++)
+    for (j = 5; j < 31; j++)
     {
       t1 = ques6(i, j);
       t2 = ans6(i, j);
       if (t1 != t2)
       {
-     //   printf("Error at %d, %d, output of ques6 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+        printf("Error at %d, %d, output of ques6 is t1 = %d, t2 = %d\n", i, j, t1, t2);
       } 
     }
   }
-// TODO: This doesn't work either right now
+
   // Question 7:
   for (i = -10; i < 10; i++)
   {
@@ -497,7 +501,7 @@ int main(){
     t2 = ans10(i);
     if (t1 != t2)
     {
-//      printf("Error at %d, output of ques9 is t1 = %d, t2 = %d\n", i, t1, t2);
+      printf("Error at %d, output of ques9 is t1 = %d, t2 = %d\n", i, t1, t2);
     } 
   }
   // TODO: Errors when i = -9, -3, -1
@@ -539,7 +543,7 @@ int main(){
       t2 = ans13(i, j);
       if (t1 != t2)
       {
-     //   printf("Error at %d, %d, output of ques13 is t1 = %d, t2 = %d\n", i, j, t1, t2);
+        printf("Error at %d, %d, output of ques13 is t1 = %d, t2 = %d\n", i, j, t1, t2);
       } 
     }
   }
@@ -568,11 +572,5 @@ int main(){
       printf("Error at %d, output of ques9 is t1 = %d, t2 = %d\n", i, t1, t2);
     } 
   }
-
-
- /* for(i = 1; i < 21; i++){
-    printf("%d, %d, output of ques16 is t1 = %04x, t2 =%d  \n", i, 1, ques16(i), ans16(i));
-  }*/
-  
 	return 0;
 }
