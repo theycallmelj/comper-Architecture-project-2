@@ -71,7 +71,6 @@ int ques0(int x, int y){ //subtracts y from x
 /* Answer to PART B: */
 int ans0(int x, int y){
 
-
     return (x-y);
 }
 
@@ -104,6 +103,10 @@ int ques2(x) {
 }
 
 int ans2(x){
+    if (x < 0)
+    {
+      return x * -1;
+    }
     return x;
 }
 
@@ -117,6 +120,14 @@ int ques3(int x) {
 }
 
 int ans3(int x){
+    if (x < 0)
+    {
+      return -1;
+    }
+    if (x == 0)
+    {
+      return 0;
+    }
     return 1;
 }
 
@@ -367,7 +378,7 @@ int main(){
     for (j = -5; j < 5; j++)
     {
       t1 = ques1(i, j);
-      t2 = ques1(i, j);
+      t2 = ans1(i, j);
       if (t1 != t2)
       {
         printf("Error at %d, %d, output of ques1 is t1 = %d, t2 = %d\n", i, j, t1, t2);
@@ -378,20 +389,30 @@ int main(){
   // Question 2:
   for (i = -10; i < 10; i++)
   {
-    for (j = -5; j < 5; j++)
+    t1 = ques2(i);
+    t2 = ans2(i);
+    if (t1 != t2)
     {
-      t1 = ques1(i, j);
-      t2 = ques1(i, j);
-      if (t1 != t2)
-      {
-        printf("Error at %d, %d, output of ques1 is t1 = %d, t2 = %d\n", i, j, t1, t2);
-      } 
-    }
+      printf("Error at %d, output of ques2 is t1 = %d, t2 = %d\n", i, t1, t2);
+    } 
   }
 
-  for(i = 1; i < 21; i++){
-    printf("%d, %d, output of ques16 is t1 = %04x, t2 =%d  \n", i, 1, ques16(i), ans16(i));
+  // Question 3:
+  for (i = -10; i < 10; i++)
+  {
+    t1 = ques3(i);
+    t2 = ans3(i);
+    if (t1 != t2)
+    {
+      printf("Error at %d, output of ques3 is t1 = %d, t2 = %d\n", i, t1, t2);
+    } 
   }
+
+  
+
+ /* for(i = 1; i < 21; i++){
+    printf("%d, %d, output of ques16 is t1 = %04x, t2 =%d  \n", i, 1, ques16(i), ans16(i));
+  }*/
   
 	return 0;
 }
